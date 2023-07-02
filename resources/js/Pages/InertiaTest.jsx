@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { useState } from 'react'
+import { router } from '@inertiajs/react'
 
 export default function InertiaTest() {
 	const [values, setValues] = useState({
@@ -15,9 +16,15 @@ export default function InertiaTest() {
 		})
 	}
 
+	const onSubmit = (e) => {
+		e.preventDefault()
+		console.log(values)
+		router.post('/inertia', values) //URLはweb.phpのルートパスと同じにしないといけない
+	}
+
 	return (
 		<>
-			あああ
+			InertiaTest.jsxページ
 			<br />
 			<Link href='/'>ホームへ</Link>
 			<br />
@@ -33,15 +40,24 @@ export default function InertiaTest() {
 				value={values.title}
 				onChange={handleChange}
 			/>
-			{values.title}<br />
-      <input
+			{values.title}
+			<br />
+			<input
 				type='text'
 				name='content'
 				value={values.content}
 				onChange={handleChange}
 			/>
 			{values.content}
-			<Link as='button' method='post' href={route('inertia.store')}></Link>
+			<br />
+			<Link
+				as='button'
+				method='post'
+				href={route('inertia.store')}
+				onClick={onSubmit}
+				className='border border-black mt-3 px-3 py-1 rounded'>
+				保存
+			</Link>
 		</>
 	)
 }

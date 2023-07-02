@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('inertia_forms', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('content');
+            $table->string('title')->comment('タイトル');
+            $table->string('content')->comment('本文');
             $table->timestamps();
         });
     }
