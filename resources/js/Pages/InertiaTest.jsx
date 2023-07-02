@@ -8,10 +8,10 @@ export default function InertiaTest() {
 	})
 
 	const handleChange = (e) => {
-		const { title, value } = e.target
+		const { name, value } = e.target
 		setValues({
 			...values,
-			[title]: value,
+			[name]: value,
 		})
 	}
 
@@ -33,7 +33,14 @@ export default function InertiaTest() {
 				value={values.title}
 				onChange={handleChange}
 			/>
-			{values.title}
+			{values.title}<br />
+      <input
+				type='text'
+				name='content'
+				value={values.content}
+				onChange={handleChange}
+			/>
+			{values.content}
 			<Link as='button' method='post' href={route('inertia.store')}></Link>
 		</>
 	)
