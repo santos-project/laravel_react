@@ -25,6 +25,7 @@ Route::get('/inertia/index', [InertiaFormController::class, 'index'])->name('ine
 Route::get('/inertia/create', [InertiaFormController::class, 'create'])->name('inertia.create');
 Route::get('/inertia/show/{id}', [InertiaFormController::class, 'show'])->name('inertia.show');
 Route::post('/inertia', [InertiaFormController::class, 'store'])->name('inertia.store');
+Route::delete('/inertia/{id}', [InertiaFormController::class, 'delete'])->name('inertia.delete');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

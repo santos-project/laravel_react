@@ -10,7 +10,9 @@ class InertiaFormController extends Controller
 {
   public function index()
   {
-    return Inertia::render('Inertia/Index');
+    return Inertia::render('Inertia/Index', [
+      'blogs' => InertiaForm::all()
+    ]);
   }
 
   public function create()
@@ -21,7 +23,8 @@ class InertiaFormController extends Controller
   public function show($id)
   {
     return Inertia::render('Inertia/Show', [
-      'id' => $id
+      'id' => $id,
+      'blog' => InertiaForm::findOrFail($id)
     ]);
   }
 
@@ -31,12 +34,27 @@ class InertiaFormController extends Controller
       'title' => ['required', 'max:20'],
       'content' => ['required']
     ]);
-    
+
     $inertiaForm = new InertiaForm;
     $inertiaForm->title = $request->title;
     $inertiaForm->content = $request->content;
     $inertiaForm->save();
 
-    return to_route('inertia.index');
+    return to_route('inertia.index')
+      ->with([
+        'message' => '登録しました。'
+      ]);
+  }
+
+  public function delete($id)
+  {
+    // 削除処理
+    $blog = InertiaForm::findOrFail($id);
+    $blog->delete();
+
+    return to_route('inertia.index')
+      ->with([
+        'message' => '削除しました。'
+      ]);
   }
 }
