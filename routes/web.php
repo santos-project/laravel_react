@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InertiaFormController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::get('/inertia/create', [InertiaFormController::class, 'create'])->name('i
 Route::get('/inertia/show/{id}', [InertiaFormController::class, 'show'])->name('inertia.show');
 Route::post('/inertia', [InertiaFormController::class, 'store'])->name('inertia.store');
 Route::delete('/inertia/{id}', [InertiaFormController::class, 'delete'])->name('inertia.delete');
+
+Route::resource('items', ItemController::class)
+    ->middleware(['auth', 'verified']);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
