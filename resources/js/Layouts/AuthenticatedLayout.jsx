@@ -27,6 +27,11 @@ export default function Authenticated({ auth, header, children }) {
 									active={route().current('dashboard')}>
 									Dashboard
 								</NavLink>
+								<NavLink
+									href={route('items.index')}
+									active={route().current('items.index')}>
+									商品管理
+								</NavLink>
 							</div>
 						</div>
 
@@ -116,6 +121,11 @@ export default function Authenticated({ auth, header, children }) {
 							href={route('dashboard')}
 							active={route().current('dashboard')}>
 							Dashboard
+						</ResponsiveNavLink>
+						<ResponsiveNavLink
+							href={route('items.index')}
+							active={route().current('items.index')}>
+							商品管理
 						</ResponsiveNavLink>
 					</div>
 

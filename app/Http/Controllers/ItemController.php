@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Models\Item;
+use Inertia\Inertia;
 
 class ItemController extends Controller
 {
@@ -15,7 +16,13 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        // dd(Item::select('id', 'name', 'price', 'is_selling')->get());
+        $items = Item::select('id', 'name', 'price', 'is_selling')->get();
+
+        return Inertia::render('Items/Index', [ // 第一引数はコンポーネント名を指定する
+            'items' => $items
+            // 'items' => Item::select('id', 'name', 'price', 'is_selling')->get()
+        ]);
     }
 
     /**
