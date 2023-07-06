@@ -1,8 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 
-const Index = (props, items) => {
-	console.log(Object.values(items));
+const Index = (props) => {
 	return (
 		<AuthenticatedLayout
 			auth={props.auth}
@@ -21,9 +20,12 @@ const Index = (props, items) => {
 							<section className='text-gray-600 body-font'>
 								<div className='container px-5 py-8 mx-auto'>
 									<div className='flex pl-4 my-4 lg:w-2/3 w-full mx-auto'>
-										<button className='flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded'>
-											Button
-										</button>
+										<Link
+											as='button'
+											href={route('items.create')}
+											className='flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded'>
+											商品登録
+										</Link>
 									</div>
 
 									<div className='lg:w-2/3 w-full mx-auto overflow-auto'>
@@ -45,16 +47,22 @@ const Index = (props, items) => {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													{Object.values(items).map((item) => (
-														<>
-															<td className='px-4 py-3'>{item.id}</td>
-															<td className='px-4 py-3'>{item.name}</td>
-															<td className='px-4 py-3'>{item.price}</td>
-															<td className='px-4 py-3'>{item.is_selling}</td>
-														</>
-													))}
-												</tr>
+												{props.items.map((item) => (
+													<tr key={item.id}>
+														<td className='px-4 py-3 border-b-2 border-gray-200'>
+															{item.id}
+														</td>
+														<td className='px-4 py-3 border-b-2 border-gray-200'>
+															{item.name}
+														</td>
+														<td className='px-4 py-3 border-b-2 border-gray-200'>
+															{item.price}
+														</td>
+														<td className='px-4 py-3 border-b-2 border-gray-200'>
+															{item.is_selling ? '販売中' : '停止中'}
+														</td>
+													</tr>
+												))}
 											</tbody>
 										</table>
 									</div>
