@@ -1,7 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, usePage } from '@inertiajs/react'
 
 const Index = (props) => {
+	const { flash } = usePage().props
+	console.log({ flash })
+
 	return (
 		<AuthenticatedLayout
 			auth={props.auth}
@@ -19,6 +22,11 @@ const Index = (props) => {
 						<div className='p-6 text-gray-900'>
 							<section className='text-gray-600 body-font'>
 								<div className='container px-5 py-8 mx-auto'>
+									<div>
+										{flash.status === 'success' && (
+											<div className='bg-blue-300 text-white p-3'>{flash.message}</div>
+										)}
+									</div>
 									<div className='flex pl-4 my-4 lg:w-2/3 w-full mx-auto'>
 										<Link
 											as='button'

@@ -9,91 +9,96 @@ use Inertia\Inertia;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // dd(Item::select('id', 'name', 'price', 'is_selling')->get());
-        $items = Item::select('id', 'name', 'price', 'is_selling')->get();
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    // dd(Item::select('id', 'name', 'price', 'is_selling')->get());
+    $items = Item::select('id', 'name', 'price', 'is_selling')->get();
 
-        return Inertia::render('Items/Index', [ // 第一引数はコンポーネント名を指定する
-            'items' => $items
-            // 'items' => Item::select('id', 'name', 'price', 'is_selling')->get()
-        ]);
-    }
+    return Inertia::render('Items/Index', [ // 第一引数はコンポーネント名を指定する
+      'items' => $items
+      // 'items' => Item::select('id', 'name', 'price', 'is_selling')->get()
+    ]);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return Inertia::render('Items/Create');
-    }
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    return Inertia::render('Items/Create');
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreItemRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreItemRequest $request)
-    {
-        Item::create([
-            'name' => $request->name,
-            'memo' => $request->memo,
-            'price' => $request->price,
-        ]);
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \App\Http\Requests\StoreItemRequest  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(StoreItemRequest $request)
+  {
 
-        return to_route('items.index');
-    }
+    Item::create([
+      'name' => $request->name,
+      'memo' => $request->memo,
+      'price' => $request->price,
+    ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Item $item)
-    {
-        //
-    }
+    return to_route('items.index')
+      ->with([
+        'message' => '登録しました。',
+        'status' => 'success'
+      ]);
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Item $item)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Item  $item
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Item $item)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateItemRequest  $request
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateItemRequest $request, Item $item)
-    {
-        //
-    }
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  \App\Models\Item  $item
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(Item $item)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Item $item)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \App\Http\Requests\UpdateItemRequest  $request
+   * @param  \App\Models\Item  $item
+   * @return \Illuminate\Http\Response
+   */
+  public function update(UpdateItemRequest $request, Item $item)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Item  $item
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Item $item)
+  {
+    //
+  }
 }

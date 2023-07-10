@@ -3,7 +3,8 @@ import { Head, router, usePage } from '@inertiajs/react'
 import { useState } from 'react'
 
 const Create = (props) => {
-	// const { errors } = usePage().props
+	const { errors } = usePage().props
+	// console.log({errors});
 
 	const [forms, setForms] = useState({
 		name: '',
@@ -58,6 +59,7 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
+														{errors.name && <div className='text-red-500 mt-2'>{errors.name}</div>}
 													</div>
 												</div>
 
@@ -73,6 +75,7 @@ const Create = (props) => {
 															name='memo'
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out'></textarea>
+															{errors.memo && <div className='text-red-500'>{errors.memo}</div>}
 													</div>
 												</div>
 
@@ -90,6 +93,7 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
+														{errors.price && <div className='text-red-500 mt-2'>{errors.price}</div>}
 													</div>
 												</div>
 

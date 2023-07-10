@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 export default function Create() {
 	const { errors } = usePage().props
+	// console.log({errors});
 
 	const [values, setValues] = useState({
 		title: '',
