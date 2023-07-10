@@ -24,7 +24,9 @@ const Index = (props) => {
 								<div className='container px-5 py-8 mx-auto'>
 									<div>
 										{flash.status === 'success' && (
-											<div className='bg-blue-300 text-white p-3'>{flash.message}</div>
+											<div className='bg-blue-300 text-white p-3'>
+												{flash.message}
+											</div>
 										)}
 									</div>
 									<div className='flex pl-4 my-4 lg:w-2/3 w-full mx-auto'>
@@ -57,8 +59,10 @@ const Index = (props) => {
 											<tbody>
 												{props.items.map((item) => (
 													<tr key={item.id}>
-														<td className='px-4 py-3 border-b-2 border-gray-200'>
-															{item.id}
+														<td className='px-4 py-3 border-b-2 border-gray-200 text-blue-400'>
+															<Link href={route('items.show', { item: item.id })}>
+																{item.id}
+															</Link>
 														</td>
 														<td className='px-4 py-3 border-b-2 border-gray-200'>
 															{item.name}
