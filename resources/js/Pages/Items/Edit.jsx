@@ -17,7 +17,9 @@ const Edit = (props) => {
 	console.log(forms);
 
 	const hChange = (e) => {
-		const { name, value } = e.target
+		// const { name, value } = e.target
+		const name = e.target.name
+		const value = e.target.name === 'is_selling' ? e.target.checked : e.target.value
 		setForms({
 			...forms,
 			[name]: value,
@@ -124,7 +126,7 @@ const Edit = (props) => {
 															type='radio'
 															id='is_sellingt'
 															name='is_selling'
-															value='true'
+															value={true}
 															checked={props.item.is_selling === true}
 															onChange={hChange}
 														/>
@@ -133,7 +135,7 @@ const Edit = (props) => {
 															type='radio'
 															id='is_selling_f'
 															name='is_selling'
-															value='false'
+															value={false}
 															checked={props.item.is_selling === false}
 															onChange={hChange}
 														/>

@@ -20,19 +20,19 @@ class ItemSeeder extends Seeder
         'name' => 'カット',
         'memo' => 'カットの詳細',
         'price' => 6000,
-        'is_selling' => true
+        'is_selling' => 1
       ],
       [
         'name' => 'カラー',
         'memo' => 'カラーの詳細',
         'price' => 8000,
-        'is_selling' => false
+        'is_selling' => 0
       ],
       [
         'name' => 'パーマ(カット込み)',
         'memo' => 'パーマ、カットの詳細',
         'price' => 13000,
-        'is_selling' => true
+        'is_selling' => 1
       ],
     ]);
   }
