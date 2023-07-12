@@ -11,8 +11,10 @@ const Edit = (props) => {
 		name: props.item.name,
 		memo: props.item.memo,
 		price: props.item.price,
-		is_selling: props.item.is_selling
+		is_selling: props.item.is_selling,
 	})
+
+	console.log(forms);
 
 	const hChange = (e) => {
 		const { name, value } = e.target
@@ -62,7 +64,11 @@ const Edit = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.name && <div className='text-red-500 mt-2'>{errors.name}</div>}
+														{errors.name && (
+															<div className='text-red-500 mt-2'>
+																{errors.name}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -79,7 +85,9 @@ const Edit = (props) => {
 															value={props.item.memo}
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out'></textarea>
-															{errors.memo && <div className='text-red-500'>{errors.memo}</div>}
+														{errors.memo && (
+															<div className='text-red-500'>{errors.memo}</div>
+														)}
 													</div>
 												</div>
 
@@ -98,12 +106,45 @@ const Edit = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.price && <div className='text-red-500 mt-2'>{errors.price}</div>}
+														{errors.price && (
+															<div className='text-red-500 mt-2'>
+																{errors.price}
+															</div>
+														)}
 													</div>
 												</div>
 
 												<div className='p-2 w-full'>
-													<button type='submit' className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
+													<div className='relative'>
+														<label
+															className='leading-7 text-sm text-gray-600 mr-5'>
+															ステータス
+														</label>
+														<input
+															type='radio'
+															id='is_sellingt'
+															name='is_selling'
+															value='true'
+															checked={props.item.is_selling === true}
+															onChange={hChange}
+														/>
+														<label htmlFor='is_selling_t' className='ml-2 mr-4'>販売中</label>
+														<input
+															type='radio'
+															id='is_selling_f'
+															name='is_selling'
+															value='false'
+															checked={props.item.is_selling === false}
+															onChange={hChange}
+														/>
+														<label htmlFor='is_selling_f' className='ml-2 mr-4'>停止中</label>
+													</div>
+												</div>
+
+												<div className='p-2 w-full'>
+													<button
+														type='submit'
+														className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
 														編集
 													</button>
 												</div>
