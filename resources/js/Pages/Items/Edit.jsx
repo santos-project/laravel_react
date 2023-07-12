@@ -14,12 +14,12 @@ const Edit = (props) => {
 		is_selling: props.item.is_selling,
 	})
 
-	console.log(forms);
+	// console.log(forms);
 
 	const hChange = (e) => {
 		// const { name, value } = e.target
 		const name = e.target.name
-		const value = e.target.name === 'is_selling' ? e.target.checked : e.target.value
+		const value = e.target.name === 'is_selling' ? Number(e.target.checked) : e.target.value
 		setForms({
 			...forms,
 			[name]: value,
@@ -28,7 +28,7 @@ const Edit = (props) => {
 
 	const storeItem = (e) => {
 		e.preventDefault()
-		router.post('/items', forms)
+		// router.post('/items', forms)
 	}
 
 	return (
@@ -104,7 +104,7 @@ const Edit = (props) => {
 															type='number'
 															id='price'
 															name='price'
-															value={props.item.price}
+															value={forms.price}
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
@@ -123,23 +123,15 @@ const Edit = (props) => {
 															ステータス
 														</label>
 														<input
-															type='radio'
-															id='is_sellingt'
+															type='checkbox'
+															id='is_selling_t'
 															name='is_selling'
-															value={true}
-															checked={props.item.is_selling === true}
+															checked={forms.is_selling}
 															onChange={hChange}
 														/>
-														<label htmlFor='is_selling_t' className='ml-2 mr-4'>販売中</label>
-														<input
-															type='radio'
-															id='is_selling_f'
-															name='is_selling'
-															value={false}
-															checked={props.item.is_selling === false}
-															onChange={hChange}
-														/>
-														<label htmlFor='is_selling_f' className='ml-2 mr-4'>停止中</label>
+														<label htmlFor='is_selling_t' className='ml-2 mr-4'>
+															{forms.is_selling === 1 ? '販売中' : '停止中'}
+														</label>
 													</div>
 												</div>
 
