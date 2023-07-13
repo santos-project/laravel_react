@@ -1,8 +1,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, router } from '@inertiajs/react'
 import { nl2br } from '@/common'
 
 const Show = (props) => {
+	const deleteItem = (id) => {
+		router.delete(route('items.destroy', { item: props.item.id }), {
+			onBefore: () => confirm('本当に削除しますか？'),
+		})
+	}
+
 	return (
 		<AuthenticatedLayout
 			auth={props.auth}
@@ -90,6 +96,14 @@ const Show = (props) => {
 													className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
 													編集する
 												</Link>
+											</div>
+
+											<div className='p-2 w-full'>
+												<button
+													onClick={() => deleteItem(props.item.id)}
+													className='flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg'>
+													削除する
+												</button>
 											</div>
 										</div>
 									</div>

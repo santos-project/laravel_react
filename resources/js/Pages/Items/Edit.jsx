@@ -19,16 +19,17 @@ const Edit = (props) => {
 	const hChange = (e) => {
 		// const { name, value } = e.target
 		const name = e.target.name
-		const value = e.target.name === 'is_selling' ? Number(e.target.checked) : e.target.value
+		const value =
+			e.target.name === 'is_selling' ? Number(e.target.checked) : e.target.value
 		setForms({
 			...forms,
 			[name]: value,
 		})
 	}
 
-	const storeItem = (e) => {
+	const updateItem = (e) => {
 		e.preventDefault()
-		// router.post('/items', forms)
+		router.put(`/items/${props.item.id}`,  forms)
 	}
 
 	return (
@@ -47,7 +48,7 @@ const Edit = (props) => {
 					<div className='bg-white overflow-hidden shadow-sm sm:rounded-lg'>
 						<div className='p-6 text-gray-900'>
 							<section className='text-gray-600 body-font relative'>
-								<form onSubmit={storeItem}>
+								<form onSubmit={updateItem}>
 									<div className='container px-5 py-8 mx-auto'>
 										<div className='lg:w-1/2 md:w-2/3 mx-auto'>
 											<div className='flex flex-wrap -m-2'>
@@ -62,7 +63,7 @@ const Edit = (props) => {
 															type='text'
 															id='name'
 															name='name'
-															value={props.item.name}
+															value={forms.name}
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
@@ -84,7 +85,7 @@ const Edit = (props) => {
 														<textarea
 															id='memo'
 															name='memo'
-															value={props.item.memo}
+															value={forms.memo}
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out'></textarea>
 														{errors.memo && (
@@ -118,8 +119,7 @@ const Edit = (props) => {
 
 												<div className='p-2 w-full'>
 													<div className='relative'>
-														<label
-															className='leading-7 text-sm text-gray-600 mr-5'>
+														<label className='leading-7 text-sm text-gray-600 mr-5'>
 															ステータス
 														</label>
 														<input
@@ -139,7 +139,7 @@ const Edit = (props) => {
 													<button
 														type='submit'
 														className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
-														編集
+														更新する
 													</button>
 												</div>
 											</div>

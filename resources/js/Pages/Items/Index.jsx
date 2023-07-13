@@ -28,7 +28,13 @@ const Index = (props) => {
 												{flash.message}
 											</div>
 										)}
+										{flash.status === 'danger' && (
+											<div className='bg-red-300 text-white p-3'>
+												{flash.message}
+											</div>
+										)}
 									</div>
+
 									<div className='flex pl-4 my-4 lg:w-2/3 w-full mx-auto'>
 										<Link
 											as='button'
