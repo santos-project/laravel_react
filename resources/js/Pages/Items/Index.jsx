@@ -3,7 +3,6 @@ import { Head, Link, usePage } from '@inertiajs/react'
 
 const Index = (props) => {
 	const { flash } = usePage().props
-	console.log({ flash })
 
 	return (
 		<AuthenticatedLayout
@@ -25,6 +24,11 @@ const Index = (props) => {
 									<div>
 										{flash.status === 'success' && (
 											<div className='bg-blue-300 text-white p-3'>
+												{flash.message}
+											</div>
+										)}
+										{flash.status === 'update' && (
+											<div className='bg-green-400 text-white p-3'>
 												{flash.message}
 											</div>
 										)}
