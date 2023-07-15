@@ -7,7 +7,6 @@ const Show = ({ id, blog }) => {
 		router.delete(`/inertia/${id}`, {
 			onBefore: () => confirm('本当に削除しますか？'),
 		})
-		// console.log(id);
 	}
 
 	return (

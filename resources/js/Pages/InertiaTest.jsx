@@ -18,7 +18,7 @@ export default function InertiaTest() {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		console.log(values)
+		// console.log(values)
 		router.post('/inertia', values) //URLはweb.phpのルートパスと同じにしないといけない
 	}
 

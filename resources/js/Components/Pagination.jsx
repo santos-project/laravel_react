@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react'
 
 export default function Pagination({ links }) {
-	console.log({ links })
+	// console.log({ links })
 	return (
 		<div className='flex justify-center align-middle'>
 			{links.length > 3 && (
@@ -15,8 +15,8 @@ export default function Pagination({ links }) {
 							) : (
 								<Link
 									className={
-										'mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-indigo-500 focus:text-indigo-500' +
-										(link.active && 'bg-blue-700')
+										'mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white hover:text-blue-700 focus:border-indigo-500 focus:text-indigo-500' +
+										(link.active && ' bg-blue-700 text-white')
 									}
 									href={link.url}
 									dangerouslySetInnerHTML={{ __html: link.label }}></Link>
