@@ -1,25 +1,49 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head, router, usePage } from '@inertiajs/react'
+import KenAll from 'ken-all'
 import { useState } from 'react'
 
 const Create = (props) => {
 	const { errors } = usePage().props
 	// console.log({errors});
+	// KenAll('1000004').then((res) => console.log(res))
 
 	const [forms, setForms] = useState({
-		name: null,
-		kana: null,
-		tel: null,
-		email: null,
-		postcode: null,
-		address: null,
-		birthday: null,
-		gender: null,
-		memo: null,
+		name: '',
+		kana: '',
+		tel: '',
+		email: '',
+		postcode: '',
+		address: '',
+		birthday: '',
+		gender: '',
+		memo: '',
 	})
 
 	const hChange = (e) => {
-		const { name, value } = e.target
+		// const { name, value } = e.target
+		const postcode = e.target.name === 'postcode' && e.target.value
+
+		if (postcode.length === 7) {
+			KenAll(postcode).then((res) => {
+				if (res.length === 0) {
+					setForms({
+						...forms,
+						address: '該当する住所はありません',
+					})
+				} else {
+					setForms({
+						...forms,
+						address: res[0].join(''),
+					})
+				}
+			})
+		}
+
+		const name = e.target.name
+		const value = e.target.name === 'postcode' ? postcode : e.target.value
+		console.log(value)
+
 		setForms({
 			...forms,
 			[name]: value,
@@ -65,7 +89,11 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.name && <div className='text-red-500 mt-2'>{errors.name}</div>}
+														{errors.name && (
+															<div className='text-red-500 mt-2'>
+																{errors.name}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -83,7 +111,11 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.kana && <div className='text-red-500 mt-2'>{errors.kana}</div>}
+														{errors.kana && (
+															<div className='text-red-500 mt-2'>
+																{errors.kana}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -101,7 +133,11 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.tel && <div className='text-red-500 mt-2'>{errors.tel}</div>}
+														{errors.tel && (
+															<div className='text-red-500 mt-2'>
+																{errors.tel}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -119,7 +155,11 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.email && <div className='text-red-500 mt-2'>{errors.email}</div>}
+														{errors.email && (
+															<div className='text-red-500 mt-2'>
+																{errors.email}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -135,9 +175,14 @@ const Create = (props) => {
 															id='postcode'
 															name='postcode'
 															onChange={hChange}
+															maxLength={7}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.postcode && <div className='text-red-500 mt-2'>{errors.postcode}</div>}
+														{errors.postcode && (
+															<div className='text-red-500 mt-2'>
+																{errors.postcode}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -152,10 +197,15 @@ const Create = (props) => {
 															type='text'
 															id='address'
 															name='address'
+															value={forms.address}
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.address && <div className='text-red-500 mt-2'>{errors.address}</div>}
+														{errors.address && (
+															<div className='text-red-500 mt-2'>
+																{errors.address}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -173,14 +223,17 @@ const Create = (props) => {
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
 														/>
-														{errors.birthday && <div className='text-red-500 mt-2'>{errors.birthday}</div>}
+														{errors.birthday && (
+															<div className='text-red-500 mt-2'>
+																{errors.birthday}
+															</div>
+														)}
 													</div>
 												</div>
 
 												<div className='p-2 w-full'>
 													<div className='relative'>
-														<label
-															className='leading-7 text-sm text-gray-600'>
+														<label className='leading-7 text-sm text-gray-600'>
 															性別
 														</label>
 														<input
@@ -223,7 +276,11 @@ const Create = (props) => {
 															その他
 														</label>
 
-														{errors.gender && <div className='text-red-500 mt-2'>{errors.gender}</div>}
+														{errors.gender && (
+															<div className='text-red-500 mt-2'>
+																{errors.gender}
+															</div>
+														)}
 													</div>
 												</div>
 
@@ -239,12 +296,16 @@ const Create = (props) => {
 															name='memo'
 															onChange={hChange}
 															className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out'></textarea>
-															{errors.memo && <div className='text-red-500'>{errors.memo}</div>}
+														{errors.memo && (
+															<div className='text-red-500'>{errors.memo}</div>
+														)}
 													</div>
 												</div>
 
 												<div className='p-2 w-full'>
-													<button type='submit' className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
+													<button
+														type='submit'
+														className='flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg'>
 														顧客登録
 													</button>
 												</div>
