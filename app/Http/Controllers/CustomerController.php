@@ -41,7 +41,7 @@ class CustomerController extends Controller
    */
   public function create()
   {
-    //
+    return Inertia::render('Customers/Create');
   }
 
   /**
@@ -52,7 +52,23 @@ class CustomerController extends Controller
    */
   public function store(StoreCustomerRequest $request)
   {
-    //
+    Customer::create([
+      'name' => $request->name,
+      'kana' => $request->kana,
+      'tel' => $request->tel,
+      'email' => $request->email,
+      'postcode' => $request->postcode,
+      'address' => $request->address,
+      'birthday' => $request->birthday,
+      'gender' => $request->gender,
+      'memo' => $request->memo,
+    ]);
+
+    return to_route('customer.index')
+      ->with([
+        'message' => '登録しました。',
+        'status' => 'success'
+      ]);
   }
 
   /**
