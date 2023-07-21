@@ -189,7 +189,7 @@ const Create = (props) => {
 															name='gender'
 															className='ml-4 mr-2'
 															onChange={hChange}
-															value={'men'}
+															value={1}
 														/>
 														<label
 															htmlFor='men'
@@ -202,7 +202,7 @@ const Create = (props) => {
 															name='gender'
 															className='ml-4 mr-2'
 															onChange={hChange}
-															value={'women'}
+															value={1}
 														/>
 														<label
 															htmlFor='women'
@@ -215,7 +215,7 @@ const Create = (props) => {
 															name='gender'
 															className='ml-4 mr-2'
 															onChange={hChange}
-															value={'other'}
+															value={2}
 														/>
 														<label
 															htmlFor='other'

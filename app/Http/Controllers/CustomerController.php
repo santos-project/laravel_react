@@ -64,7 +64,7 @@ class CustomerController extends Controller
       'memo' => $request->memo,
     ]);
 
-    return to_route('customer.index')
+    return to_route('customers.index')
       ->with([
         'message' => '登録しました。',
         'status' => 'success'
