@@ -42,7 +42,6 @@ const Create = (props) => {
 
 		const name = e.target.name
 		const value = e.target.name === 'postcode' ? postcode : e.target.value
-		console.log(value)
 
 		setForms({
 			...forms,
