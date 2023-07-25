@@ -23,6 +23,7 @@ const Create = (props) => {
 	const hChange = (e) => {
 		// const { name, value } = e.target
 		const postcode = e.target.name === 'postcode' && e.target.value
+		console.log(postcode);
 
 		if (postcode.length === 7) {
 			KenAll(postcode).then((res) => {
