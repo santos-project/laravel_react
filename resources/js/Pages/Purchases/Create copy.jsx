@@ -11,29 +11,18 @@ const Create = (props) => {
 	const [forms, setForms] = useState({
 		date: getToday(),
 		customer_id: '',
-		items: [],
+		items: { id: '', name: '', price: '', quantity: 0 },
+		// quantity: quantity[0],
 	})
 
 	console.log(forms)
 
-	useEffect(() => {
-		props.items.forEach((item) => {
-			const itemList = {
-				id: item.id,
-				name: item.name,
-				price: item.price,
-				quantity: 0,
-			}
-
-			// setForms([...oldvalue, {items: itemList}])
-
-			console.log(itemList.length)
-		})
-	}, [])
-
 	const hChange = (e) => {
 		const addQuantity = e.target.name === 'quantity' && e.target.value
+		// console.log(addQuantity)
 
+		// console.log(e)
+		// const { name, value } = e.target
 		const name = e.target.name
 		const value = e.target.name === 'quantity' ? addQuantity : e.target.value
 
@@ -45,13 +34,46 @@ const Create = (props) => {
 		if (addQuantity > 0) {
 			setForms({
 				...forms,
-				items: [
-					{
-						quantity: addQuantity,
-					},
-				],
+				items: {
+					quantity: addQuantity,
+				},
 			})
 		}
+	}
+
+	useEffect(() => {
+		props.items.forEach((item) => {
+			item.quantity = forms.items.quantity
+
+			// setForms({
+			// 	...forms,
+			// 	items: {
+			// 		quantity: item.quantity,
+			// 	},
+			// })
+		})
+	}, [])
+
+	// const aChange = (e) => {
+	// 	setForms({
+	// 		...forms,
+	// 		items: {
+	// 			quantity: forms.quantity,
+	// 		},
+	// 	})
+	// }
+
+	const total = (i) => {
+		// const result = i.price * forms.items.quantity
+
+		// return result
+
+		// // let tptalTest = {}
+		// for (const element of i) {
+		// 	console.log(element);
+		// }
+
+		console.log(i)
 	}
 
 	return (
@@ -80,23 +102,24 @@ const Create = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {forms.items.map((item, index) => ( */}
-					<tr>
-						<td>{forms.items.id}</td>
-						<td>{forms.items.name}</td>
-						<td>{forms.items.price}</td>
-						<td>
-							<select name='quantity' onChange={hChange}>
-								{quantity.map((q, index) => (
-									<option value={q} key={index}>
-										{q}
-									</option>
-								))}
-							</select>
-						</td>
-						<td>{forms.items.price * forms.items.quantity}</td>
-					</tr>
-					{/* ))} */}
+					{props.items.map((item, index) => (
+						<tr key={index}>
+							<td>{item.id}</td>
+							<td>{item.name}</td>
+							<td>{item.price}</td>
+							<td>
+								<select name='quantity' onChange={hChange}>
+									{quantity.map((q, index) => (
+										<option value={q} key={index}>
+											{q}
+										</option>
+									))}
+								</select>
+							</td>
+							<td>{item.price * item.quantity}</td>
+							<td>{total(item)}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
