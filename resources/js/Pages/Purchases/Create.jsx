@@ -1,57 +1,37 @@
 import { getToday } from '@/common'
-import { forEach, set, values } from 'lodash'
 // import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 
 const Create = (props) => {
 	// const {errors} = usePage().props
-
+	const initItems = props.items.map((item) => {
+		return {
+			...item,
+			quantity: 0,
+		}
+	})
+	const [items, setItems] = useState(initItems)
 	const quantity = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 	const [forms, setForms] = useState({
 		date: getToday(),
 		customer_id: '',
-		items: [],
 	})
 
-	console.log(forms)
-
-	useEffect(() => {
-		props.items.forEach((item) => {
-			const itemList = {
-				id: item.id,
-				name: item.name,
-				price: item.price,
-				quantity: 0,
-			}
-
-			// setForms([...oldvalue, {items: itemList}])
-
-			console.log(itemList.length)
-		})
-	}, [])
-
 	const hChange = (e) => {
-		const addQuantity = e.target.name === 'quantity' && e.target.value
-
-		const name = e.target.name
-		const value = e.target.name === 'quantity' ? addQuantity : e.target.value
+		const { name, value } = e.target
 
 		setForms({
 			...forms,
 			[name]: value,
 		})
+	}
 
-		if (addQuantity > 0) {
-			setForms({
-				...forms,
-				items: [
-					{
-						quantity: addQuantity,
-					},
-				],
-			})
-		}
+	const hChangeItem = (e, itemIndex) => {
+		const newItems = [...items]
+		newItems[itemIndex].quantity = e.target.value
+		setItems(newItems)
+		console.log(e.target.value);
 	}
 
 	return (
@@ -80,23 +60,23 @@ const Create = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {forms.items.map((item, index) => ( */}
-					<tr>
-						<td>{forms.items.id}</td>
-						<td>{forms.items.name}</td>
-						<td>{forms.items.price}</td>
-						<td>
-							<select name='quantity' onChange={hChange}>
-								{quantity.map((q, index) => (
-									<option value={q} key={index}>
-										{q}
-									</option>
-								))}
-							</select>
-						</td>
-						<td>{forms.items.price * forms.items.quantity}</td>
-					</tr>
-					{/* ))} */}
+					{items.map((item, index) => (
+						<tr key={index}>
+							<td>{item.id}</td>
+							<td>{item.name}</td>
+							<td>{item.price}</td>
+							<td>
+								<select name='quantity' onChange={(e) => hChangeItem(e, index)}>
+									{quantity.map((q, index) => (
+										<option value={q} key={index}>
+											{q}
+										</option>
+									))}
+								</select>
+							</td>
+							<td>{item.price * item.quantity}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
