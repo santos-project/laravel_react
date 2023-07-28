@@ -31,8 +31,15 @@ const Create = (props) => {
 		const newItems = [...items]
 		newItems[itemIndex].quantity = e.target.value
 		setItems(newItems)
-		console.log(e.target.value);
 	}
+
+	const totalPrice = () => {
+		let total = 0
+		items.value.map ((item) => {
+			total += item.price * item.quantity
+			return total
+		}
+	)}
 
 	return (
 		<div>
